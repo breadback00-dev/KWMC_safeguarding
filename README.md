@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Community Hub Child Attendance & Safeguarding System
 
-## Getting Started
+A comprehensive system for managing children's club attendance with integrated safeguarding notifications via SMS.
 
-First, run the development server:
+## Core Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **QR Code Check-in/Check-out**: Seamless logging of child arrivals and departures.
+- **Automated SMS Notifications**: Parents receive instant updates when their child arrives or leaves using Twilio.
+- **Late Arrival & Absence Alerts**: Buffer-based absence detection, triggering alerts to parents if a child hasn't arrived.
+- **Parent Reply Handling**: Two-way SMS integration for handling replies like 'LATE' or 'NOT COMING'.
+- **Session Tracking**: Management of daily sessions, capacity limits, and registrations.
+- **Safeguarding Log**: A persistent database trail of every check-in, check-out, alert, and reply for safeguarding compliance.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js (App Router)
+- **Language**: TypeScript
+- **Styling**: TailwindCSS
+- **Database & Auth**: Supabase
+- **Communications**: Twilio SMS
+- **Hosting**: Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup Instructions
 
-## Learn More
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Environment Variables**:
+   Copy `.env.example` to `.env.local` and populate the required keys for Supabase and Twilio.
+   ```bash
+   cp .env.example .env.local
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Database Setup**:
+   Run the SQL scripts located in `docs/schema.sql` against your Supabase project.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+- `/app`: Next.js App Router folders and API endpoints.
+- `/components`: Reusable React components.
+- `/lib`: Utilities for Supabase, QR generation, SMS sending, etc.
+- `/cron`: Node.js cron scripts for checking absences.
+- `/types`: TypeScript interfaces.
+- `/docs`: Documentation and database schemas.
