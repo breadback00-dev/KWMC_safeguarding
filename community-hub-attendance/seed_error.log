@@ -1,0 +1,17 @@
+C:\Users\OYE\Projects\KWMC - Safeguarding\community-hub-attendance\node_modules\@supabase\supabase-js\src\lib\helpers.ts:86
+    throw new Error('supabaseUrl is required.')
+          ^
+
+Error: supabaseUrl is required.
+    at validateSupabaseUrl (C:\Users\OYE\Projects\KWMC - Safeguarding\community-hub-attendance\node_modules\@supabase\supabase-js\src\lib\helpers.ts:86:11)
+    at new SupabaseClient (C:\Users\OYE\Projects\KWMC - Safeguarding\community-hub-attendance\node_modules\@supabase\supabase-js\src\SupabaseClient.ts:117:21)
+    at createClient (C:\Users\OYE\Projects\KWMC - Safeguarding\community-hub-attendance\node_modules\@supabase\supabase-js\src\index.ts:60:10)
+    at <anonymous> (C:\Users\OYE\Projects\KWMC - Safeguarding\community-hub-attendance\lib\supabase\client.ts:4:25)
+    at Object.<anonymous> (C:\Users\OYE\Projects\KWMC - Safeguarding\community-hub-attendance\lib\supabase\client.ts:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Object.transformer (C:\Users\OYE\Projects\KWMC - Safeguarding\community-hub-attendance\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1104)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+
+Node.js v24.14.0

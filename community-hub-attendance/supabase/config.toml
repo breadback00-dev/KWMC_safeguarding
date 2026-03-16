@@ -1,0 +1,29 @@
+[project]
+id = "dihpdvexxqcybdnwypzk"
+
+[db]
+# You will need to set the database password to run db push.
+# However, this file sets up the project structure for Supabase CLI.
+port = 54322
+
+[api]
+port = 54321
+external_url = "http://localhost:54321"
+
+[auth]
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["https://localhost:3000"]
+jwt_expiry = 3600
+enable_signup = true
+
+[storage]
+enabled = true
+
+[inngest]
+enabled = false
+
+[realtime]
+enabled = false
+
+[functions]
+enabled = false

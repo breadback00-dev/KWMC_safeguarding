@@ -1,17 +1,21 @@
 import { NextResponse } from 'next/server';
+import { performCheckOut } from '@/lib/services/attendance';
 
-export async function POST(request: Request, context: any) {
-    // Await the params
-    const { childId } = await context.params;
+export async function POST(
+  _request: Request,
+  { params }: { params: Promise<{ childId: string }> }
+) {
+  const { childId } = await params;
+  const result = await performCheckOut(childId, 'qr');
 
-    // 1. Mock updating check-out time
-    console.log(`[DB] Attendance record updated: Child ${childId} CHECKED OUT.`);
+  if (!result.success) {
+    return NextResponse.json({ error: result.error }, { status: 409 });
+  }
 
-    // 2. Mock sending departure SMS
-    console.log(`[SMS] To Parent of Child ${childId}: "Jack has left Football Club at ${new Date().toLocaleTimeString()}."`);
-
-    // 3. Mock log safeguarding event
-    console.log(`[LOG] Safeguarding event: CHECK_OUT recorded for Child ${childId}.`);
-
-    return NextResponse.json({ status: 'checked_out', childId });
+  return NextResponse.json({
+    status: 'checked_out',
+    childId,
+    attendanceId: result.data.id,
+    sessionId: result.data.session_id,
+  });
 }

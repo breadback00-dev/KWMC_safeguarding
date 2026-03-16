@@ -1,17 +1,22 @@
 import { NextResponse } from 'next/server';
+import { performCheckIn } from '@/lib/services/attendance';
 
-export async function POST(request: Request, context: any) {
-    // Await the params to resolve Next.js 15 route parameters asynchronously
-    const { childId } = await context.params;
+export async function POST(
+  _request: Request,
+  { params }: { params: Promise<{ childId: string }> }
+) {
+  const { childId } = await params;
+  const result = await performCheckIn(childId, 'qr');
 
-    // 1. Mock recording check-in
-    console.log(`[DB] Attendance record created: Child ${childId} CHECKED IN.`);
+  if (!result.success) {
+    const status = result.error === 'Child is already checked in.' ? 409 : 400;
+    return NextResponse.json({ error: result.error }, { status });
+  }
 
-    // 2. Mock sending arrival SMS
-    console.log(`[SMS] To Parent of Child ${childId}: "Jack has arrived at Football Club at ${new Date().toLocaleTimeString()}."`);
-
-    // 3. Mock safeguarding log
-    console.log(`[LOG] Safeguarding event: CHECK_IN recorded for Child ${childId}.`);
-
-    return NextResponse.json({ status: 'checked_in', childId });
+  return NextResponse.json({
+    status: 'checked_in',
+    childId,
+    attendanceId: result.data.id,
+    sessionId: result.data.session_id,
+  });
 }
