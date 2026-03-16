@@ -22,7 +22,11 @@ export async function proxy(request: NextRequest) {
   );
 
   // Refresh the session token if it's about to expire
-  await supabase.auth.getUser();
+  try {
+    await supabase.auth.getUser();
+  } catch {
+    // Auth failure must never block a request
+  }
 
   return supabaseResponse;
 }
